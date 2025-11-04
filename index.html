@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de KPIs - Palmilhas</title>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #012d41;
+            background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/24045.jpg");
+            background-size: cover; /* This is the key property */
+            background-repeat: no-repeat; /* Prevents image tiling if it doesn't perfectly fit */
+            background-position: center center; /* Centers the image */
+            color: #333;
+            /* Ajustamos a altura mínima para 100vh (altura total da tela), 
+               mas subtraímos 40px para compensar o padding (20px em cima + 20px embaixo) */
+            min-height: calc(100vh - 40px);
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
+
+            /* --- MUDANÇA PRINCIPAL AQUI --- */
+            /* Isso transforma o body num container grid e centraliza seu filho direto */
+            display: grid;
+            place-items: center; /* Centraliza horizontalmente E verticalmente */
+        }
+        
+        .container-principal {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            align-items: flex-start; 
+            gap: 30px; 
+            width: 100%; /* Garante que o container se ajuste bem */
+            max-width: 830px; /* (400px + 400px + 30px de gap) */
+        }
+
+        .calculadora-container {
+            width: 100%;
+            max-width: 400px; 
+            background-color: #ffffff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+            box-sizing: border-box;
+            /* Adiciona uma transição suave para o caso de empilhar */
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.5rem; 
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resultado-box {
+            margin-top: 25px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .resultado-box h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-principal">
+
+        <div class="calculadora-container">
+            <h1>Consumo de Corte</h1>
+
+            <div class="input-group">
+                <label for="chapas">Quantidade de Chapas</label>
+                <input type="number" id="chapas">
+            </div>
+
+            <div class="input-group">
+                <label for="material_corte">Material (Corte)</label>
+                <select id="material_corte">
+                    <option data-multi="3.08" data-div="1.4">EVA</option>
+                    <option data-multi="3" data-div="1.5">Espuma</option>
+                    <option data-multi="2.7" data-div="1.5">Converse</option>
+                    <option data-multi="1.8" data-div="1.5">Palmbox</option>
+                </select>
+            </div>
+
+            <button onclick="calcularCorte()">Calcular</button>
+
+            <div class="resultado-box">
+                Resultado:
+                <h2 id="resultado_corte">0.00</h2>
+            </div>
+        </div>
+
+        <div class="calculadora-container">
+            <h1>Consumo de Cola</h1>
+
+            <div class="input-group">
+                <label for="quantidade_consumo">Quantidade Usada</label>
+                <input type="number" id="quantidade_consumo">
+            </div>
+
+            <div class="input-group">
+                <label for="material_consumo">Material (Consumo)</label>
+                <select id="material_consumo">
+                    <option value="14.5">Cola (Lata)</option>
+                    <option value="0.835">Halogênio (Unidade)</option>
+                </select>
+            </div>
+
+            <button onclick="calcularConsumo()">Calcular</button>
+
+            <div class="resultado-box">
+                Peso Total (kg):
+                <h2 id="resultado_consumo">0.000</h2>
+            </div>
+        </div>
+
+    </div> <script>
+        
+        // --- Lógica da Calculadora 1 (CORTE) ---
+        function calcularCorte() {
+            const qtdChapas = document.getElementById('chapas').value;
+            const selectElement = document.getElementById('material_corte');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            
+            const multiplicador = selectedOption.dataset.multi;
+            const divisor = selectedOption.dataset.div;
+
+            if (!qtdChapas || qtdChapas <= 0) {
+                document.getElementById('resultado_corte').innerText = "Insira um valor";
+                return;
+            }
+            
+            const resultadoFinal = (qtdChapas * multiplicador) / divisor;
+            document.getElementById('resultado_corte').innerText = resultadoFinal.toFixed(2);
+        }
+
+        // --- Lógica da Calculadora 2 (CONSUMO) ---
+        function calcularConsumo() {
+            const quantidade = document.getElementById('quantidade_consumo').value;
+            const constante = document.getElementById('material_consumo').value;
+
+            if (!quantidade || quantidade <= 0) {
+                document.getElementById('resultado_consumo').innerText = "Insira um valor";
+                return;
+            }
+            
+            const resultadoFinal = quantidade * constante;
+            document.getElementById('resultado_consumo').innerText = resultadoFinal.toFixed(3);
+        }
+    </script>
+
+</body>
+</html>
