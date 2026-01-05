@@ -3,182 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Operações</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #012d41;
-            background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/24045.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-attachment: fixed;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-sizing: border-box;
-        }
-
-        .nav-central {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .link-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #0056b3;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            flex: 1;
-            min-width: 250px;
-            justify-content: center;
-        }
-
-        .link-card:hover {
-            transform: translateY(-3px);
-            background: #ffffff;
-        }
-
-        .container-principal {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            align-items: stretch; 
-            gap: 20px; 
-            width: 100%;
-            max-width: 1300px;
-        }
-
-        .calculadora-container {
-            width: 100%;
-            max-width: 380px; 
-            background-color: #ffffff;
-            padding: 25px 30px;
-            border-radius: 10px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1 {
-            color: #0056b3;
-            text-align: center;
-            margin-top: 0;
-            font-size: 1.3rem;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 1rem;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-top: auto;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .resultado-box {
-            margin-top: 20px;
-            background-color: #f0f9ff;
-            border: 1px solid #b3e0ff;
-            padding: 12px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .resultado-box h2 {
-            margin: 5px 0 0 0;
-            font-size: 1.6rem;
-            color: #0056b3;
-        }
-
-        .label-pequena {
-            font-size: 0.75rem;
-            color: #666;
-            margin-top: 5px;
-        }
-    </style>
+    <title>Portal de Operações</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="nav-central">
-        <a href="https://dbcover.sharepoint.com/:x:/s/operations/EXYg4ULUMBlPiFUFHjANvEUBhDQT-NB8jN8BNeNaKmZyPw?e=4%3aGLXvhC&at=9" target="_blank" class="link-card">📊 Solicitação KPIs</a>
-        <a href="https://dbcover.sharepoint.com/sites/operations/Documentos%20compartidos/Forms/AllItems.aspx?id=%2Fsites%2Foperations%2FDocumentos%20compartidos%2FZBRASIL%20NE%2FANALISE%20SEGUNDA%20QUALIDADE%20E%20PERDAS&viewid=9242e998%2D2cd6%2D45e1%2Db08e%2Dcc7d1687f55a&p=true&ga=1" target="_blank" class="link-card">📁 Documentos e SharePoint</a>
+        <a href="#" id="link-kpi" class="link-card">📊 Solicitação KPIs</a>
+        <a href="#" id="link-sharepoint" class="link-card">📁 Documentos e SharePoint</a>
     </div>
 
     <div class="container-principal">
-
+        
         <div class="calculadora-container">
             <h1>Cálculo de Intervalo</h1>
-            
             <label>Início (Hora : Min)</label>
             <div class="input-row">
-                <input type="number" id="h_ini" placeholder="00" min="0" max="23">
-                <input type="number" id="m_ini" placeholder="00" min="0" max="59">
+                <input type="number" id="h_ini" placeholder="00">
+                <input type="number" id="m_ini" placeholder="00">
             </div>
-            
             <br>
-            
             <label>Término (Hora : Min)</label>
             <div class="input-row">
-                <input type="number" id="h_fim" placeholder="00" min="0" max="23">
-                <input type="number" id="m_fim" placeholder="00" min="0" max="59">
+                <input type="number" id="h_fim" placeholder="00">
+                <input type="number" id="m_fim" placeholder="00">
             </div>
-
-            <button onclick="calcularHoras()" style="margin-top: 20px;">Calcular Minutos</button>
-
+            <button onclick="calcularHoras()">Calcular Minutos</button>
             <div class="resultado-box">
                 Total em Minutos:
                 <h2 id="res_minutos">0</h2>
@@ -189,11 +39,11 @@
         <div class="calculadora-container">
             <h1>Consumo de Corte</h1>
             <div class="input-group">
-                <label for="chapas">Quantidade de Chapas</label>
+                <label>Quantidade de Chapas</label>
                 <input type="number" id="chapas" placeholder="0">
             </div>
             <div class="input-group">
-                <label for="material_corte">Material (Corte)</label>
+                <label>Material (Corte)</label>
                 <select id="material_corte">
                     <option data-multi="3.08" data-div="1.4">EVA</option>
                     <option data-multi="3" data-div="1.5">Espuma</option>
@@ -211,11 +61,11 @@
         <div class="calculadora-container">
             <h1>Consumo de Cola</h1>
             <div class="input-group">
-                <label for="quantidade_consumo">Quantidade Usada</label>
+                <label>Quantidade Usada</label>
                 <input type="number" id="quantidade_consumo" placeholder="0">
             </div>
             <div class="input-group">
-                <label for="material_consumo">Material (Consumo)</label>
+                <label>Material (Consumo)</label>
                 <select id="material_consumo">
                     <option value="14.5">Cola (Lata)</option>
                     <option value="0.835">Halogênio (Unidade)</option>
@@ -230,48 +80,6 @@
 
     </div>
 
-    <script>
-        function calcularHoras() {
-            const h1 = parseInt(document.getElementById('h_ini').value) || 0;
-            const m1 = parseInt(document.getElementById('m_ini').value) || 0;
-            const h2 = parseInt(document.getElementById('h_fim').value) || 0;
-            const m2 = parseInt(document.getElementById('m_fim').value) || 0;
-
-            let totalMinutosInicio = (h1 * 60) + m1;
-            let totalMinutosFim = (h2 * 60) + m2;
-
-            // Caso o horário final seja menor que o inicial (ex: virada de turno/dia)
-            if (totalMinutosFim < totalMinutosInicio) {
-                totalMinutosFim += 24 * 60; 
-            }
-
-            const diferenca = totalMinutosFim - totalMinutosInicio;
-            
-            const horasFormat = Math.floor(diferenca / 60);
-            const minsFormat = diferenca % 60;
-
-            document.getElementById('res_minutos').innerText = diferenca;
-            document.getElementById('res_formatado').innerText = `Tempo: ${horasFormat}h ${minsFormat.toString().padStart(2, '0')}min`;
-        }
-
-        function calcularCorte() {
-            const qtdChapas = document.getElementById('chapas').value;
-            const selectElement = document.getElementById('material_corte');
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const multiplicador = selectedOption.dataset.multi;
-            const divisor = selectedOption.dataset.div;
-            if (!qtdChapas || qtdChapas <= 0) return;
-            const resultadoFinal = (qtdChapas * multiplicador) / divisor;
-            document.getElementById('resultado_corte').innerText = resultadoFinal.toFixed(2);
-        }
-
-        function calcularConsumo() {
-            const quantidade = document.getElementById('quantidade_consumo').value;
-            const constante = document.getElementById('material_consumo').value;
-            if (!quantidade || quantidade <= 0) return;
-            const resultadoFinal = quantidade * constante;
-            document.getElementById('resultado_consumo').innerText = resultadoFinal.toFixed(3);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
