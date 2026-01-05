@@ -1,26 +1,16 @@
 const linksEmpresa = {
-    kpi: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tLzp4Oi9zL29wZXJhdGlvbnMvRVhZZzRVTFVNQmxQaUZVRkhqQU52RVVCaERRVC1OQjhqTjhCTmVOYUttWnlQdz9lPTQlM2FHTFh2aEMmYXQ9OQ==",
-    sharepoint: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tL3NpdGVzL29wZXJhdGlvbnMvRG9jdW1lbnRvcyUyMGNvbXBhcnRpZG9zL0Zvcm1zL0FsbEl0ZW1zLmFzcHg/aWQ9JTJGc2l0ZXMlMkZvcGVyYXRpbvbnMlMkZEb2N1bWVudG9zJTIwY29tcGFydGlkb3MlMkZaQlJBU0lMJTIwTkUlMkZBTkFMSVNFJTIwU0VHVU5EQSUyMFFVQUxJREFERUUlMjBFJTIwUEVSREFTJnZpZXdpZD05MjQyZTk5OC0yY2Q2LTQ1ZTEtYjA4ZS1jYzdkMTY4N2Y1NWEmcD10cnVlJmdhPTE="
+    kpi: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tLzp4Oi9zL29wZXJhdGlvbnMvRVhZZzRVTFVNQmxQaUZVRkhqQU52RVVCaERRVC1OQjhqTjhCTmVOYUttWnlQdz9lPTQlM2FHTFh2aEMmYXQ9OQ=="
 };
 
 // Função para abrir os links apenas no clique
 function configurarLinks() {
     const btnKpi = document.getElementById('link-kpi');
-    const btnSp = document.getElementById('link-sharepoint');
 
     if(btnKpi) {
         btnKpi.addEventListener('click', (e) => {
             e.preventDefault();
             // Decodifica e abre
             window.open(atob(linksEmpresa.kpi), '_blank');
-        });
-    }
-
-    if(btnSp) {
-        btnSp.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Decodifica e abre
-            window.open(atob(linksEmpresa.sharepoint), '_blank');
         });
     }
 }
