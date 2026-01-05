@@ -3,6 +3,7 @@ const linksEmpresa = {
     sharepoint: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tL3NpdGVzL29wZXJhdGlvbnMvRG9jdW1lbnRvcyUyMGNvbXBhcnRpZG9zL0Zvcm1zL0FsbEl0ZW1zLmFzcHg/aWQ9JTJGc2l0ZXMlMkZvcGVyYXRpbvbnMlMkZEb2N1bWVudG9zJTIwY29tcGFydGlkb3MlMkZaQlJBU0lMJTIwTkUlMkZBTkFMSVNFJTIwU0VHVU5EQSUyMFFVQUxJREFERUUlMjBFJTIwUEVSREFTJnZpZXdpZD05MjQyZTk5OC0yY2Q2LTQ1ZTEtYjA4ZS1jYzdkMTY4N2Y1NWEmcD10cnVlJmdhPTE="
 };
 
+// Função para abrir os links apenas no clique
 function configurarLinks() {
     const btnKpi = document.getElementById('link-kpi');
     const btnSp = document.getElementById('link-sharepoint');
@@ -10,6 +11,7 @@ function configurarLinks() {
     if(btnKpi) {
         btnKpi.addEventListener('click', (e) => {
             e.preventDefault();
+            // Decodifica e abre
             window.open(atob(linksEmpresa.kpi), '_blank');
         });
     }
@@ -17,15 +19,14 @@ function configurarLinks() {
     if(btnSp) {
         btnSp.addEventListener('click', (e) => {
             e.preventDefault();
+            // Decodifica e abre
             window.open(atob(linksEmpresa.sharepoint), '_blank');
         });
     }
 }
 
-// Garante que as funções rodem assim que a página carregar
-window.addEventListener('DOMContentLoaded', () => {
-    configurarLinks();
-});
+// Inicializa quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', configurarLinks);
 
 // --- LÓGICA: Calculadora de Horas ---
 function calcularHoras() {
@@ -48,7 +49,6 @@ function calcularHoras() {
 function calcularCorte() {
     const qtd = document.getElementById('chapas').value;
     const sel = document.getElementById('material_corte');
-    if (!sel) return;
     const opt = sel.options[sel.selectedIndex];
     
     if (!qtd || qtd <= 0) return;
