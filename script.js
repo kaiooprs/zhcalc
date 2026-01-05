@@ -1,13 +1,31 @@
-const kpiCode = "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tLzp4Oi9zL29wZXJhdGlvbnMvRVhZZzRVTFVNQmxQaUZVRkhqQU52RVVCaERRVC1OQjhqTjhCTmVOYUttWnlQdz9lPTQlM2FHTFh2aEMmYXQ9OQ==";
-const sharepointCode = "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tL3NpdGVzL29wZXJhdGlvbnMvRG9jdW1lbnRvcyUyMGNvbXBhcnRpZG9zL0Zvcm1zL0FsbEl0ZW1zLmFzcHg/aWQ9JTJGc2l0ZXMlMkZvcGVyYXRpbvbnMlMkZEb2N1bWVudG9zJTIwY29tcGFydGlkb3MlMkZaQlJBU0lMJTIwTkUlMkZBTkFMSVNFJTIwU0VHVU5EQSUyMFFVQUxJREFERUUlMjBFJTIwUEVSREFTJnZpZXdpZD05MjQyZTk5OC0yY2Q2LTQ1ZTEtYjA4ZS1jYzdkMTY4N2Y1NWEmcD10cnVlJmdhPTE=";
-
-window.onload = function() {
-    document.getElementById('link-kpi').href = atob(kpiCode);
-    document.getElementById('link-kpi').target = "_blank";
-    
-    document.getElementById('link-sharepoint').href = atob(sharepointCode);
-    document.getElementById('link-sharepoint').target = "_blank";
+const linksEmpresa = {
+    kpi: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tLzp4Oi9zL29wZXJhdGlvbnMvRVhZZzRVTFVNQmxQaUZVRkhqQU52RVVCaERRVC1OQjhqTjhCTmVOYUttWnlQdz9lPTQlM2FHTFh2aEMmYXQ9OQ==",
+    sharepoint: "aHR0cHM6Ly9kYmNvdmVyLnNoYXJlcG9pbnQuY29tL3NpdGVzL29wZXJhdGlvbnMvRG9jdW1lbnRvcyUyMGNvbXBhcnRpZG9zL0Zvcm1zL0FsbEl0ZW1zLmFzcHg/aWQ9JTJGc2l0ZXMlMkZvcGVyYXRpbvbnMlMkZEb2N1bWVudG9zJTIwY29tcGFydGlkb3MlMkZaQlJBU0lMJTIwTkUlMkZBTkFMSVNFJTIwU0VHVU5EQSUyMFFVQUxJREFERUUlMjBFJTIwUEVSREFTJnZpZXdpZD05MjQyZTk5OC0yY2Q2LTQ1ZTEtYjA4ZS1jYzdkMTY4N2Y1NWEmcD10cnVlJmdhPTE="
 };
+
+function configurarLinks() {
+    const btnKpi = document.getElementById('link-kpi');
+    const btnSp = document.getElementById('link-sharepoint');
+
+    if(btnKpi) {
+        btnKpi.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(atob(linksEmpresa.kpi), '_blank');
+        });
+    }
+
+    if(btnSp) {
+        btnSp.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open(atob(linksEmpresa.sharepoint), '_blank');
+        });
+    }
+}
+
+// Garante que as funções rodem assim que a página carregar
+window.addEventListener('DOMContentLoaded', () => {
+    configurarLinks();
+});
 
 // --- LÓGICA: Calculadora de Horas ---
 function calcularHoras() {
@@ -19,7 +37,7 @@ function calcularHoras() {
     let total1 = (h1 * 60) + m1;
     let total2 = (h2 * 60) + m2;
 
-    if (total2 < total1) total2 += 1440; // Trata virada de dia
+    if (total2 < total1) total2 += 1440; 
 
     const dif = total2 - total1;
     document.getElementById('res_minutos').innerText = dif;
@@ -30,6 +48,7 @@ function calcularHoras() {
 function calcularCorte() {
     const qtd = document.getElementById('chapas').value;
     const sel = document.getElementById('material_corte');
+    if (!sel) return;
     const opt = sel.options[sel.selectedIndex];
     
     if (!qtd || qtd <= 0) return;
